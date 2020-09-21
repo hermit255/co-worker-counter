@@ -4,6 +4,8 @@ services:
   app:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      - CHATWORK_API_TOKEN=${CHATWORK_API_TOKEN}
     volumes:
       - ./app:/app
     ports:

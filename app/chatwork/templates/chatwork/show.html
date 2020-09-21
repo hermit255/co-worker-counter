@@ -1,0 +1,22 @@
+{% extends '_layouts/default.html' %}
+{% block content %}
+<h1> 差分表 </h2>
+<h2> 解説 </h2>
+<ul>
+  <li>
+    新規加入、脱退メンバーの把握表
+  </li>
+  <li>
+    chatwork の 2点間での所属メンバーを比較して、新データにしかいない人、旧データにしかいない人をピックアップ
+  </li>
+  <li>
+  比較点の間で加入と離脱の両方を行ったメンバーは無視される
+  </li>
+</ul>
+{% include 'chatwork/_diff_tables.html' with diff_data=d1 %}
+{% include 'chatwork/_diff_tables.html' with diff_data=d2 %}
+{% include 'chatwork/_diff_tables.html' with diff_data=d3 %}
+{% include 'chatwork/_diff_tables.html' with diff_data=d4 %}
+{% include 'chatwork/_diff_tables.html' with diff_data=d5 %}
+{% include 'chatwork/_diff_tables.html' with diff_data=d6 %}
+{% endblock %}

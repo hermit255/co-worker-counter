@@ -1,0 +1,30 @@
+<h2 class="my-5"> {{ diff_data.period }} </h2>
+{% if diff_data.added or diff_data.dropped %}
+<h3 class="mt-5"> 加入 </h3>
+<table class="table table-striped">
+  {% for data in diff_data.added %}
+  <tr>
+    <td>
+      {{ data.name }}
+    </td>
+    <td>
+      {{ data.department }}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h3 class="mt-5"> 離脱 </h3>
+<table class="table table-striped">
+  {% for data in diff_data.dropped %}
+  <tr>
+    <td>
+      {{ data.name }}
+    </td>
+    <td>
+      {{ data.department }}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
