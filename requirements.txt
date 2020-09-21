@@ -1,7 +1,7 @@
 # for django
 Django>=3.0,<4.0
 psycopg2-binary>=2.8
-# for apps
 django-environ
+# for apps
 requests
 python-dateutil

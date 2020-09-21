@@ -6,6 +6,7 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     environment:
       - CHATWORK_API_TOKEN=${CHATWORK_API_TOKEN}
+      - ROOM_ID=${ROOM_ID}
     volumes:
       - ./app:/app
     ports:
