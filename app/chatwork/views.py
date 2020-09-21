@@ -21,15 +21,7 @@ def show(request):
     return render(request, 'chatwork/show.html', params)
 
 def get_diff(start, end):
-    query = Account.objects.filter(date__gte=start, date__lte=end).values('date').annotate(Count('date'))
-    if len(query) < 2:
-        return dict(period='no comparable data found during ' + start + ' ~ ' + end, added=list(), dropped=list())
-    latest = query.order_by('-date')[0]['date'].isoformat()
-    oldest = query.order_by('date')[0]['date'].isoformat()
-    period = oldest + '~' + latest
-
-    data_latest = Account.objects.filter(date=latest) or list()
-    if end == date.today().isoformat() and not data_latest:
+    if not Account.objects.filter(date=date.today().isoformat()):
         base = 'https://api.chatwork.com/v2/'
         end_point = 'contacts'
         api_token = env('CHATWORK_API_TOKEN')
@@ -38,7 +30,14 @@ def get_diff(start, end):
         for contact in res.json():
             data = dict(account_id=contact['account_id'], name=contact['name'][:2], department=contact['department'], date=date.today().isoformat())
             Account.objects.update_or_create(**data)
-        data_today = Account.objects.filter(date=latest)
+    query = Account.objects.filter(date__gte=start, date__lte=end).values('date').annotate(Count('date'))
+    if len(query) < 2:
+        return dict(period='no comparable data found during ' + start + ' ~ ' + end, added=list(), dropped=list())
+    latest = query.order_by('-date')[0]['date'].isoformat()
+    oldest = query.order_by('date')[0]['date'].isoformat()
+    period = oldest + '~' + latest
+
+    data_latest = Account.objects.filter(date=latest) or list()
     data_oldest = Account.objects.filter(date=oldest) or list()
 
     ids_latest = data_latest.values_list('account_id', flat=True) if data_latest else list()
