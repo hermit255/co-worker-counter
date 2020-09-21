@@ -10,5 +10,7 @@ services:
       - TZ=Asia/Tokyo
     volumes:
       - ./app:/app
+      - ./export_environment.sh:/script/export_environment.sh
+      - ./crontab:/script/crontab
     ports:
       - "8000:8000"

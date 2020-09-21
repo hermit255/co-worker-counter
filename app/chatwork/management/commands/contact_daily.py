@@ -12,8 +12,7 @@ env = environ.Env(DEBUG=(bool, False))
 class Command(BaseCommand):
     def handle(self, *args, **options):
         today = date.today().isoformat()
-        #yesterday = (date.today() - relativedelta(days=1)).isoformat()
-        yesterday = (date.today() - relativedelta(months=1)).isoformat()
+        yesterday = (date.today() - relativedelta(days=1)).isoformat()
         data = get_diff(yesterday, today)
         report_title = data['period']
         report_added = 'added: ' + '(' + str(len(data['added'])) + ')' + ' / '.join(list(d.name for d in data['added']))
