@@ -7,6 +7,7 @@ services:
     environment:
       - CHATWORK_API_TOKEN=${CHATWORK_API_TOKEN}
       - ROOM_ID=${ROOM_ID}
+      - TZ=Asia/Tokyo
     volumes:
       - ./app:/app
     ports:
